@@ -9,4 +9,4 @@ Simple module to standarize the creation and minimal configuration for CRUDs
 
 # install the module
 
-```go get "https://github.com/Mecuate/crud_module"```
+```go get github.com/Mecuate/crud_module```
