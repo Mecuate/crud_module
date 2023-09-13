@@ -1,1 +1,6 @@
-.github
+.github/
+.vscode/
+.idea/
+
+.env
+*.log

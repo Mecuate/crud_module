@@ -1,3 +1,9 @@
 package crud_module
 
-type versionType = string
+import "github.com/gorilla/mux"
+
+type MuxRouter struct {
+	Router *mux.Router
+}
+
+type VersionString = string

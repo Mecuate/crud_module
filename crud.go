@@ -2,10 +2,9 @@ package crud_module
 
 import (
 	"fmt"
+	// "github.com/gorilla/mux"
 )
 
-var Version versionType = "0.0.1"
-
-func Log(vers string) {
-	fmt.Println("[DEBUG] " + vers)
+func NewGroup(base string) {
+	fmt.Println("NewGroup requested with base: " + base)
 }
