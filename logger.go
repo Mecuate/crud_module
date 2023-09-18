@@ -11,7 +11,7 @@ const (
 	DEBUG
 	DEVELOP
 )
-const DEFAULT_LOG_ADDRESS = "0x0000f.log"
+const DEFAULT_LOG_ADDRESS = "crud_module.log"
 
 var LoggerAddress string = DEFAULT_LOG_ADDRESS
 var LogLevelSetup LoggLevel = ERROR
