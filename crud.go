@@ -7,13 +7,16 @@ import (
 )
 
 const (
-	GET ReqVerb = iota
+	CREATE ReqVerb = iota
 	READ
-	CREATE
-	POST
 	UPDATE
-	PUT
 	DELETE
+	GET
+	POST
+	PUT
+	PATCH
+	CONNECT
+	TRACE
 	CRUD
 )
 
@@ -25,16 +28,36 @@ var RegistredMethods = []string{
 	"GET",
 	"POST",
 	"PUT",
-	"PUT",
 	"PATCH",
 	"CONNECT",
+	"TRACE",
 }
 
-func CreateSingleHandlerCRUD(r MuxRouter, path string, handler HandleFunc, method ReqVerb) {
-	methodSelection, err := FindMethod(method)
+func CreateMultiHandlerCRUD(r MuxRouter, rawPath string, handlers IndividualCRUDHandlers) {
+	path := VetPath(rawPath)
+	exclusions := []string{}
+	for item, itemFunc := range handlers {
+		methodSelection, err := FindMethod(item)
+		if err != nil {
+			panic(err)
+		}
+		method := methodSelection[0]
+		r.Router.HandleFunc(path, itemFunc).Methods(method)
+		exclusions = append(exclusions, method)
+	}
+
+	LockAllOtherMethods(r, path, exclusions)
+	fmt.Println("Multi handlerCRUD: Created.", strings.Join(exclusions, " |"))
+}
+
+func CreateSingleHandlerCRUD(r MuxRouter, rawPath string, handler HandleFunc) {
+	methodSelection, err := FindMethod(CRUD)
 	if err != nil {
 		panic(err)
 	}
+
+	path := VetPath(rawPath)
+
 	for i := 0; i < len(methodSelection); i++ {
 		r.Router.HandleFunc(path, handler).Methods(methodSelection[i])
 	}

@@ -17,3 +17,5 @@ type MuxRouter struct {
 }
 
 type HandleFunc func(w http.ResponseWriter, r *http.Request)
+
+type IndividualCRUDHandlers map[ReqVerb]HandleFunc

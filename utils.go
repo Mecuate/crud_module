@@ -4,15 +4,6 @@ import (
 	"net/http"
 )
 
-func Contains(name string) bool {
-	for _, value := range restricted_words {
-		if value == name {
-			return true
-		}
-	}
-	return false
-}
-
 func FindMethod(v ReqVerb) ([]string, error) {
 	switch v {
 	case GET:
@@ -29,6 +20,10 @@ func FindMethod(v ReqVerb) ([]string, error) {
 		return []string{http.MethodPut}, nil
 	case DELETE:
 		return []string{http.MethodDelete}, nil
+	case CONNECT:
+		return []string{http.MethodConnect}, nil
+	case TRACE:
+		return []string{http.MethodTrace}, nil
 	case CRUD:
 		return []string{"CREATE", "READ", "UPDATE", http.MethodDelete}, nil
 	}
