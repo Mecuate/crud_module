@@ -18,19 +18,19 @@ func FindMethod(v ReqVerb) ([]string, error) {
 	case GET:
 		return []string{http.MethodGet}, nil
 	case READ:
-		return []string{http.MethodGet}, nil
+		return []string{"READ"}, nil
 	case CREATE:
-		return []string{http.MethodPost}, nil
+		return []string{"CREATE"}, nil
 	case POST:
 		return []string{http.MethodPost}, nil
 	case UPDATE:
-		return []string{http.MethodPatch}, nil
+		return []string{"UPDATE"}, nil
 	case PUT:
 		return []string{http.MethodPut}, nil
 	case DELETE:
 		return []string{http.MethodDelete}, nil
 	case CRUD:
-		return []string{http.MethodPost, http.MethodGet, http.MethodPatch, http.MethodDelete}, nil
+		return []string{"CREATE", "READ", "UPDATE", http.MethodDelete}, nil
 	}
 	return []string{"UNKNOWN"}, http.ErrNotSupported
 }

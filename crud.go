@@ -17,17 +17,20 @@ const (
 	CRUD
 )
 
-var RegistredMethods = []string{"GET", "POST",
-	"PUT",
+var RegistredMethods = []string{
 	"CREATE",
+	"READ",
 	"UPDATE",
 	"DELETE",
+	"GET",
+	"POST",
+	"PUT",
 	"PUT",
 	"PATCH",
 	"CONNECT",
 }
 
-func CreateSimpleCrud(r MuxRouter, path string, handler HandleFunc, method ReqVerb) {
+func CreateSingleHandlerCRUD(r MuxRouter, path string, handler HandleFunc, method ReqVerb) {
 	methodSelection, err := FindMethod(method)
 	if err != nil {
 		panic(err)
@@ -48,5 +51,5 @@ func LockAllOtherMethods(r MuxRouter, path string, excluded []string) {
 }
 
 func DefaultLockedMethod(w http.ResponseWriter, r *http.Request) {
-	http.Error(w, "403 Not Allowed", http.StatusForbidden)
+	http.Error(w, "405 Method Not Allowed", http.StatusForbidden)
 }
