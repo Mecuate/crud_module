@@ -39,7 +39,6 @@ func CreateMultiHandlerCRUD(r MuxRouter, rawPath string, handlers IndividualCRUD
 	for item, itemFunc := range handlers {
 		methodSelection, err := FindMethod(item)
 		if err != nil {
-			panic(err)
 		}
 		method := methodSelection[0]
 		r.Router.HandleFunc(path, itemFunc).Methods(method)
@@ -47,7 +46,7 @@ func CreateMultiHandlerCRUD(r MuxRouter, rawPath string, handlers IndividualCRUD
 	}
 
 	LockAllOtherMethods(r, path, exclusions)
-	fmt.Println("Multi handlerCRUD: Created.", strings.Join(exclusions, " |"))
+	fmt.Println("Multi handlerCRUD: Created.", path, strings.Join(exclusions, " |"))
 }
 
 func CreateSingleHandlerCRUD(r MuxRouter, rawPath string, handler HandleFunc) {
@@ -74,5 +73,5 @@ func LockAllOtherMethods(r MuxRouter, path string, excluded []string) {
 }
 
 func DefaultLockedMethod(w http.ResponseWriter, r *http.Request) {
-	http.Error(w, "405 Method Not Allowed", http.StatusForbidden)
+	http.Error(w, "403", http.StatusForbidden)
 }

@@ -22,6 +22,8 @@ func FindMethod(v ReqVerb) ([]string, error) {
 		return []string{http.MethodDelete}, nil
 	case CONNECT:
 		return []string{http.MethodConnect}, nil
+	case PATCH:
+		return []string{http.MethodPatch}, nil
 	case TRACE:
 		return []string{http.MethodTrace}, nil
 	case CRUD:
