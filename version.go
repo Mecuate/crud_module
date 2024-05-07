@@ -1,3 +1,3 @@
 package crud_module
 
-var Version versionType = "0.0.3"
+var Version versionType = "1.0.0"

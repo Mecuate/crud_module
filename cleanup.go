@@ -3,8 +3,7 @@ package crud_module
 import "strings"
 
 var restricted_sequences = []string{
-	"api", "apis", "root", "admin", "support", "news", "v1", "v2", "v3", "mct", "mecuate",
-	"//", "\\", "..", "$", "@", "?", "+", "'", "\"",
+	"root", "admin", "//", "\\", "..", "$", "@", "?", "+", "'", "\"",
 }
 
 func IsWordRestricted(path string) bool {

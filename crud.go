@@ -39,6 +39,7 @@ func CreateMultiHandlerCRUD(r MuxRouter, rawPath string, handlers IndividualCRUD
 	for item, itemFunc := range handlers {
 		methodSelection, err := FindMethod(item)
 		if err != nil {
+			panic(err)
 		}
 		method := methodSelection[0]
 		r.Router.HandleFunc(path, itemFunc).Methods(method)
